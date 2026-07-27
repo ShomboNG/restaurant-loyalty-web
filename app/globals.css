@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+  ============================================================
+  DESIGN TOKENS — Shombo brand colors (from brand guidelines PDF).
+  Everything below is the ONLY place color should be defined.
+  ============================================================
+
+  Vivid Red   #D4151C  — primary accent
+  White       #FFFFFF  — card surfaces
+  Cream       #F9F0E1  — page background
+  Black       #000000  — reserved for high-contrast headings
+  Dark Gray Brown #3B3931 — primary body text (softer than pure black)
+*/
+
+:root {
+  /* Surfaces */
+  --color-bg: #f9f0e1;
+  --color-surface: #ffffff;
+  --color-surface-raised: #fffdf8;
+  --color-border: #e6d8bf;
+
+  /* Text */
+  --color-text: #3b3931;
+  --color-text-strong: #000000;
+  --color-text-muted: #7a7266;
+  --color-text-faint: #a49a89;
+
+  /* Accent — Shombo vivid red */
+  --color-accent: #d4151c;
+  --color-accent-strong: #b01118;
+  --color-accent-muted: #f0c3c5;
+
+  /* Text placed on top of colored surfaces */
+  --color-on-accent: #ffffff;
+  --color-on-rank: #2a2822;
+
+  /* Semantic */
+  --color-positive: #3f7a4e;
+  --color-negative: #8c1e14;
+
+  /* Rank tiers for the leaderboard */
+  --color-rank-gold: #c9a227;
+  --color-rank-silver: #cbb98a;
+  --color-rank-bronze: #a06a3a;
+
+  /* Type scale */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-strong: var(--color-text-strong);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-faint: var(--color-text-faint);
+  --color-accent: var(--color-accent);
+  --color-accent-strong: var(--color-accent-strong);
+  --color-accent-muted: var(--color-accent-muted);
+  --color-on-accent: var(--color-on-accent);
+  --color-on-rank: var(--color-on-rank);
+  --color-positive: var(--color-positive);
+  --color-negative: var(--color-negative);
+  --color-rank-gold: var(--color-rank-gold);
+  --color-rank-silver: var(--color-rank-silver);
+  --color-rank-bronze: var(--color-rank-bronze);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+/*
+  ============================================================
+  DARK MODE — same brand palette, inverted surfaces.
+  Toggled by adding/removing `.dark` on <html> (see ThemeProvider).
+  Cream becomes the text color, Dark Gray Brown becomes the card
+  surface, red accent brightens slightly for contrast on black.
+  ============================================================
+*/
+:root.dark {
+  --color-bg: #141210;
+  --color-surface: #3b3931;
+  --color-surface-raised: #4a453b;
+  --color-border: #55503f;
+
+  --color-text: #f9f0e1;
+  --color-text-strong: #ffffff;
+  --color-text-muted: #b8ad98;
+  --color-text-faint: #8a8070;
+
+  --color-accent: #e8464c;
+  --color-accent-strong: #f0605f;
+  --color-accent-muted: #5c2422;
+
+  --color-on-accent: #ffffff;
+  --color-on-rank: #141210;
+
+  --color-positive: #5fae74;
+  --color-negative: #e8574c;
+
+  --color-rank-gold: #d4a72c;
+  --color-rank-silver: #d8c9a0;
+  --color-rank-bronze: #c98a4a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  min-height: 100vh;
+}
+
+@media (max-width: 640px) {
+  button,
+  a {
+    min-height: 40px;
+  }
+}
+
+/* Tabular digits for anything showing a point count — no layout jitter as numbers change */
+.tabular-count {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Visible keyboard focus everywhere, non-negotiable */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
