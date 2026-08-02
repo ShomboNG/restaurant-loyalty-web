@@ -3,11 +3,13 @@
 import { useEffect, useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
+import { useTheme } from '@/lib/theme-context';
 import { api, ApiError } from '@/lib/api';
 import { UsernameEditor } from '@/components/UsernameEditor';
 
 export default function SettingsPage() {
-  const { user, loading, refreshUser } = useAuth();
+  const { user, loading, refreshUser, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const router = useRouter();
 
   const [name, setName] = useState('');
@@ -110,6 +112,34 @@ export default function SettingsPage() {
           {saving ? 'Saving…' : 'Save changes'}
         </button>
       </form>
+
+    <div className="mt-4 flex items-center justify-between rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+  <div>
+    <p className="text-sm font-medium">Appearance</p>
+    <p className="text-xs text-[var(--color-text-muted)]">
+      {theme === 'dark' ? 'Dark mode' : 'Light mode'}
+    </p>
+  </div>
+  <button
+    onClick={toggleTheme}
+    className="rounded-[var(--radius-sm)] border border-[var(--color-border)] px-3 py-1.5 text-sm text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-text)]"
+  >
+    Switch to {theme === 'dark' ? 'light' : 'dark'}
+  </button>
+</div>
+
+<div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+  <button
+        onClick={() => {
+            logout();
+        router.push('/');
+        }}
+        className="text-sm text-[var(--color-negative)] hover:underline"
+    >
+        Log out
+    </button>
+    </div>
+
     </div>
   );
 }

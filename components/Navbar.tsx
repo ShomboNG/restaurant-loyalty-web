@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
-import { ThemeToggle } from './ThemeToggle';
 
 function NavLink({
   href,
@@ -31,7 +30,7 @@ function NavLink({
 }
 
 export function Navbar() {
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const isStaff = user?.role === 'STAFF' || user?.role === 'ADMIN';
 
@@ -67,20 +66,21 @@ export function Navbar() {
         </>
       )}
       {!loading && user && (
-    <>
-      <NavLink href="/dashboard" onClick={closeMenu}>
-        Dashboard
-      </NavLink>
-      <NavLink href="/orders" onClick={closeMenu}>
-          My orders
-      </NavLink>
-      <NavLink href="/redemptions" onClick={closeMenu}>
-          My redemptions
-      </NavLink>        <NavLink href="/settings" onClick={closeMenu}>
-          Settings
-      </NavLink>
-      </>
-    )}
+        <>
+          <NavLink href="/dashboard" onClick={closeMenu}>
+            Dashboard
+          </NavLink>
+          <NavLink href="/orders" onClick={closeMenu}>
+            My orders
+          </NavLink>
+          <NavLink href="/redemptions" onClick={closeMenu}>
+            My redemptions
+          </NavLink>
+          <NavLink href="/settings" onClick={closeMenu}>
+            Settings
+          </NavLink>
+        </>
+      )}
     </>
   );
 
@@ -99,24 +99,14 @@ export function Navbar() {
         <nav className="hidden items-center gap-6 md:flex">{links}</nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
-
-          {!loading &&
-            (user ? (
-              <button
-                onClick={logout}
-                className="hidden rounded-[var(--radius-sm)] border border-[var(--color-border)] px-3 py-1.5 text-sm text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-text)] sm:block"
-              >
-                Log out
-              </button>
-            ) : (
-              <Link
-                href="/login"
-                className="hidden rounded-[var(--radius-sm)] bg-[var(--color-accent)] px-4 py-1.5 text-sm font-medium text-[var(--color-on-accent)] transition-colors hover:bg-[var(--color-accent-strong)] sm:block"
-              >
-                Log in
-              </Link>
-            ))}
+          {!loading && !user && (
+            <Link
+              href="/login"
+              className="hidden rounded-[var(--radius-sm)] bg-[var(--color-accent)] px-4 py-1.5 text-sm font-medium text-[var(--color-on-accent)] transition-colors hover:bg-[var(--color-accent-strong)] sm:block"
+            >
+              Log in
+            </Link>
+          )}
 
           {/* Hamburger — mobile only */}
           <button
@@ -136,28 +126,17 @@ export function Navbar() {
       {menuOpen && (
         <div className="border-t border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-4">{links}</nav>
-          <div className="mt-4 border-t border-[var(--color-border)] pt-4">
-            {!loading &&
-              (user ? (
-                <button
-                  onClick={() => {
-                    logout();
-                    closeMenu();
-                  }}
-                  className="text-sm text-[var(--color-text-muted)]"
-                >
-                  Log out
-                </button>
-              ) : (
-                <Link
-                  href="/login"
-                  onClick={closeMenu}
-                  className="inline-block rounded-[var(--radius-sm)] bg-[var(--color-accent)] px-4 py-1.5 text-sm font-medium text-[var(--color-on-accent)]"
-                >
-                  Log in
-                </Link>
-              ))}
-          </div>
+          {!loading && !user && (
+            <div className="mt-4 border-t border-[var(--color-border)] pt-4">
+              <Link
+                href="/login"
+                onClick={closeMenu}
+                className="inline-block rounded-[var(--radius-sm)] bg-[var(--color-accent)] px-4 py-1.5 text-sm font-medium text-[var(--color-on-accent)]"
+              >
+                Log in
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>
