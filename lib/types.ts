@@ -3,6 +3,7 @@ export type Role = 'CUSTOMER' | 'STAFF' | 'ADMIN';
 export interface User {
   id: string;
   email: string;
+  username: string | null;
   name: string | null;
   phone: string | null;
   role: Role;
@@ -29,6 +30,7 @@ export interface Reward {
 export interface LeaderboardEntry {
   rank: number;
   id: string;
+  username: string | null;
   name: string | null;
   email: string;
   loyaltyPoints: number;

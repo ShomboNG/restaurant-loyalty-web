@@ -46,7 +46,9 @@ export default function LeaderboardPage() {
             >
               <div className="flex items-center gap-4">
                 <RankBadge rank={entry.rank} />
-                <span className="text-sm font-medium">{entry.name ?? entry.email}</span>
+                <span className="text-sm font-medium">
+                  {entry.username ? `@${entry.username}` : entry.name ?? entry.email}
+                </span>
               </div>
               <span className="tabular-count text-lg font-semibold text-[var(--color-accent)]">
                 {entry.loyaltyPoints.toLocaleString()}

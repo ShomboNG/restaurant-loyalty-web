@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/auth-context';
 import { api } from '@/lib/api';
 import { PointsCounter } from '@/components/PointsCounter';
 import { RankBadge } from '@/components/RankBadge';
+import { UsernameEditor } from '@/components/UsernameEditor';
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
@@ -31,9 +32,12 @@ export default function DashboardPage() {
   return (
     <div>
       <h1 className="font-[var(--font-display)] text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>
-        Hey{user.name ? `, ${user.name}` : ''}
+        Hey{user.username ? `, ${user.username}` : ''}
       </h1>
       <p className="mt-1 text-sm text-[var(--color-text-muted)]">{user.email}</p>
+      <div className="mt-2">
+        <UsernameEditor user={user} />
+      </div>
 
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <PointsCounter label="Wallet balance" value={user.walletBalance} />
