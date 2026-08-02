@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { api } from '@/lib/api';
 import { PointsCounter } from '@/components/PointsCounter';
 import { RankBadge } from '@/components/RankBadge';
-import { UsernameEditor } from '@/components/UsernameEditor';
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
@@ -31,12 +31,21 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1 className="font-[var(--font-display)] text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>
-        Hey{user.username ? `, ${user.username}` : ''}
-      </h1>
-      <p className="mt-1 text-sm text-[var(--color-text-muted)]">{user.email}</p>
-      <div className="mt-2">
-        <UsernameEditor user={user} />
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="font-[var(--font-display)] text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>
+            Hey{user.name ? `, ${user.name}` : ''}
+          </h1>
+          <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+            {user.username ? `@${user.username}` : user.email}
+          </p>
+        </div>
+        <Link
+          href="/settings"
+          className="rounded-[var(--radius-sm)] border border-[var(--color-border)] px-3 py-1.5 text-sm text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-text)]"
+        >
+          Settings
+        </Link>
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -49,6 +58,23 @@ export default function DashboardPage() {
             <span className="text-sm text-[var(--color-text-muted)]">on the leaderboard</span>
           </div>
         </div>
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Link
+          href="/orders"
+          className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition-colors hover:border-[var(--color-accent-muted)]"
+        >
+          <p className="text-sm font-medium">Order history</p>
+          <p className="mt-1 text-xs text-[var(--color-text-muted)]">Every order that's earned you points</p>
+        </Link>
+        <Link
+          href="/redemptions"
+          className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition-colors hover:border-[var(--color-accent-muted)]"
+        >
+          <p className="text-sm font-medium">Redemption history</p>
+          <p className="mt-1 text-xs text-[var(--color-text-muted)]">Rewards you've redeemed with your wallet</p>
+        </Link>
       </div>
 
       <div className="mt-6 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-muted)]">

@@ -67,10 +67,20 @@ export function Navbar() {
         </>
       )}
       {!loading && user && (
-        <NavLink href="/dashboard" onClick={closeMenu}>
-          Dashboard
-        </NavLink>
-      )}
+    <>
+      <NavLink href="/dashboard" onClick={closeMenu}>
+        Dashboard
+      </NavLink>
+      <NavLink href="/orders" onClick={closeMenu}>
+          My orders
+      </NavLink>
+      <NavLink href="/redemptions" onClick={closeMenu}>
+          My redemptions
+      </NavLink>        <NavLink href="/settings" onClick={closeMenu}>
+          Settings
+      </NavLink>
+      </>
+    )}
     </>
   );
 

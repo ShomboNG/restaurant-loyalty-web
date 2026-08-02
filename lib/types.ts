@@ -40,3 +40,26 @@ export interface OrderItemInput {
   menuItemId: string;
   quantity: number;
 }
+
+export interface OrderItemRecord {
+  id: string;
+  menuItemId: string;
+  quantity: number;
+  pointsEarned: number;
+  menuItem: MenuItem;
+}
+
+export interface OrderRecord {
+  id: string;
+  totalPoints: number;
+  note: string | null;
+  createdAt: string;
+  items: OrderItemRecord[];
+}
+
+export interface RedemptionRecord {
+  id: string;
+  pointsSpent: number;
+  createdAt: string;
+  reward: Reward;
+}

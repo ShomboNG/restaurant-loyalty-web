@@ -44,6 +44,9 @@
   --color-rank-silver: #cbb98a;
   --color-rank-bronze: #a06a3a;
 
+  /* Background chili-pattern accent — inverts in dark mode */
+  --color-pattern-accent: #d4151c;
+
   /* Type scale */
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -73,6 +76,7 @@
   --color-rank-gold: var(--color-rank-gold);
   --color-rank-silver: var(--color-rank-silver);
   --color-rank-bronze: var(--color-rank-bronze);
+  --color-pattern-accent: var(--color-pattern-accent);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
@@ -109,6 +113,9 @@
   --color-rank-gold: #d4a72c;
   --color-rank-silver: #d8c9a0;
   --color-rank-bronze: #c98a4a;
+
+  /* Inverted from light mode: cream chilies instead of red */
+  --color-pattern-accent: #f9f0e1;
 }
 
 * {
