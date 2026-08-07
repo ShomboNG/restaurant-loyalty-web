@@ -3,7 +3,6 @@ import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
 import { ThemeProvider, themeInitScript } from '@/lib/theme-context';
 import { Navbar } from '@/components/Navbar';
-import { BackgroundPattern } from '@/components/BackgroundPattern';
 
 export const metadata: Metadata = {
   title: 'Shombo Rewards',
@@ -29,7 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body suppressHydrationWarning>
-        <BackgroundPattern />
         <ThemeProvider>
           <AuthProvider>
             <Navbar />
