@@ -86,9 +86,15 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--color-border)] bg-[var(--color-bg)]">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-2.5 sm:px-6">
-        <Link href="/" className="flex items-center" aria-label="Shombo home">
-          <img src="/shombo-logo.png" alt="Shombo" className="h-14 w-14" />
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-2 sm:px-6">
+        <Link href="/" className="flex flex-col items-center gap-0.5" aria-label="Shombo home">
+          <img src="/shombo-logo.png" alt="Shombo" className="h-20 w-20" />
+          <span
+            className="text-sm font-semibold tracking-tight"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            Shombo<span className="text-[var(--color-accent)]">.</span>
+          </span>
         </Link>
 
         {/* Desktop nav */}
